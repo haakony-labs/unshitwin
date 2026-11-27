@@ -10,7 +10,7 @@
     <RootNamespace>UnshitWindows</RootNamespace>
     <ApplicationIcon>app.ico</ApplicationIcon>
     <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <Product>UnshitWindows</Product>
   </PropertyGroup>
 
