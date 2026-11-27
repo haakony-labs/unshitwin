@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/UnshitWindows/UnshitWindows.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/UnshitWindows.Tests/UnshitWindows.Tests.csproj" />
+  </Folder>
+</Solution>
