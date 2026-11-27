@@ -26,6 +26,7 @@ internal sealed class TrayContext : ApplicationContext
 
     private AppConfig _config;
     private SettingsForm? _settings;
+    private AboutForm? _about;
     private nint _pasteTarget;
     private bool _listening;
     private bool _hotkeysSuspended;
@@ -57,6 +58,7 @@ internal sealed class TrayContext : ApplicationContext
             new ToolStripSeparator(),
             _startupItem,
             new ToolStripSeparator(),
+            new ToolStripMenuItem("About UnshitWindows", null, (_, _) => OpenAbout()),
             new ToolStripMenuItem("Exit", null, (_, _) => ExitThread()),
         ]);
         settingsItem.Font = new Font(menu.Font, FontStyle.Bold);
@@ -259,6 +261,19 @@ internal sealed class TrayContext : ApplicationContext
         _settings.Activate();
     }
 
+    private void OpenAbout()
+    {
+        if (_about is { IsDisposed: false })
+        {
+            _about.Activate();
+            return;
+        }
+        _about = new AboutForm(_appIcon);
+        _about.FormClosed += (_, _) => _about = null;
+        _about.Show();
+        _about.Activate();
+    }
+
     // ---- tray menu ----
 
     private void RefreshMenu()
@@ -331,6 +346,7 @@ internal sealed class TrayContext : ApplicationContext
     protected override void ExitThreadCore()
     {
         _settings?.Close();
+        _about?.Close();
         Application.ThreadException -= OnThreadException;
         _switcher.Dispose();
         _hotkeys.UnregisterAll();
